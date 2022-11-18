@@ -6,7 +6,7 @@ const expect = chai.expect;
 
 const siteURL = "https://www2.hm.com/en_gb/index.html";
 const bstackURL = "http://vladsolovey_nLDfEK:mF4DwzGRk2vE1B86U8rs@hub-cloud.browserstack.com/wd/hub";
-const searchInputFieldPath = "//div[@class='SearchBar-module--visibleDesktop__2xYv6'][not(ancestor::ul)]//input[@placeholder='Search products']";
+const searchInputFieldPath = "//div[contains(@class, 'SearchBar-module--visibleDesktop')][not(ancestor::ul)]//input[@placeholder='Search products']";
 const acceptCookiesPath = "//*[@id='onetrust-accept-btn-handler']";
 const searchedElementsPath = "//*[@class='hm-product-item']//a[text()='Regular Fit Ripstop cargo trousers']";
 const searchedProduct = "Regular Fit Ripstop cargo trousers";
