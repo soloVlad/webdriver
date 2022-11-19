@@ -4,6 +4,8 @@ const { By, Key, until } = webdriver;
 const chai = require("chai");
 const expect = chai.expect;
 
+const capabilities = require("./capabilities.json");
+
 const siteURL = "https://www2.hm.com/en_gb/index.html";
 const bstackURL = "http://vladsolovey_nLDfEK:mF4DwzGRk2vE1B86U8rs@hub-cloud.browserstack.com/wd/hub";
 const searchInputFieldPath = "//div[contains(@class, 'SearchBar-module--visibleDesktop')][not(ancestor::ul)]//input[@placeholder='Search products']";
@@ -12,17 +14,6 @@ const searchedElementsPath = "//*[@class='hm-product-item']//a[text()='Regular F
 const searchedProduct = "Regular Fit Ripstop cargo trousers";
 
 describe("Search product test", () => {
-
-    const capabilities = {
-        'bstack:options' : {
-            "os": "Windows",
-            "osVersion": "11",
-            "buildName" : "browserstack-build-1",
-            "sessionName" : "Parallel test 1",
-        },
-        "browserName": "Chrome",
-        "browserVersion": "103.0",
-    };
 
     it("Should contain products", async function() {
         let driver = new webdriver.Builder()
