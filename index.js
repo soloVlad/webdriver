@@ -35,19 +35,23 @@ describe("Search product test", () => {
         await driver.wait(until.elementLocated(By.xpath(searchedElementsPath)), 5000);
         let searchedElements = await driver.findElements(By.xpath(searchedElementsPath));
 
-        if (searchedElements.length === 0) {
-            await driver.executeScript(
-                'browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "Some elements failed to load!"}}'
-            );
-        }
-        else {
-            await driver.executeScript(
-                'browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Products were found successfully!"}}'
-            );
-        }
+        await returnBstackResult(
+            driver,
+            searchedElements.length !== 0,
+            "Products were found successfully!",
+            "Some elements failed to load!",
+        );
 
         await driver.quit();
         expect(searchedElements).to.not.be.empty;
     }).timeout(60000);
 })
 
+async function returnBstackResult(driver, result, successMsg, failMsg) {
+    let status = result ? "passed" : "failed";
+    let msg = result ? successMsg : failMsg;
+
+    await driver.executeScript(
+        `browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"${status}","reason": "${msg}"}}`
+    );
+}
