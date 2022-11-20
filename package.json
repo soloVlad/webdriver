@@ -2,9 +2,9 @@
   "name": "webdriver",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "tests/search.spec.js",
   "scripts": {
-    "test": "mocha index.js"
+    "test": "mocha tests/*.js --timeout 60000"
   },
   "repository": {
     "type": "git",
