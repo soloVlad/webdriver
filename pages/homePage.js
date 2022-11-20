@@ -17,3 +17,5 @@ class HomePage extends Page {
         return this;
     }
 }
+
+module.exports = HomePage;
