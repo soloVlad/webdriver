@@ -1,5 +1,5 @@
 const Page = require("./page");
-const { By, Key } = require("selenium-webdriver");
+const { Key } = require("selenium-webdriver");
 
 const searchInputFieldXpath = "//div[contains(@class, 'SearchBar-module--visibleDesktop')][not(ancestor::ul)]//input[@placeholder='Search products']";
 const cookiesPopupPath = "//*[@id='onetrust-accept-btn-handler']";
