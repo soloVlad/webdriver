@@ -14,6 +14,13 @@ class Page {
     async findByXpath(xpath) {
         return this.driver.wait(until.elementLocated(By.xpath(xpath)), 5000);
     }
+
+    async clickByXpath(xpath) {
+        const element = await this.findByXpath(xpath);
+        await element.click();
+
+        return this;
+    }
 }
 
 module.exports = Page;
