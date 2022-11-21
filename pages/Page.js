@@ -1,4 +1,5 @@
 const { By, until } = require("selenium-webdriver");
+const cookiesPopupPath = "//*[@id='onetrust-accept-btn-handler']";
 
 class Page {
     constructor(driver) {
@@ -22,6 +23,12 @@ class Page {
     async clickByXpath(xpath) {
         const element = await this.findByXpath(xpath);
         await element.click();
+
+        return this;
+    }
+
+    async acceptCookies() {
+        await this.clickByXpath(cookiesPopupPath);
 
         return this;
     }

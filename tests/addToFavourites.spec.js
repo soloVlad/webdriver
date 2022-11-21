@@ -1,10 +1,12 @@
 const webdriver = require("selenium-webdriver");
 const capabilities = require("../capabilities.json");
 
-const HomePage = require("../pages/HomePage");
+const ItemPage = require("../pages/ItemPage");
+const FavouritesPage = require("../pages/FavouritesPage");
 
-describe("Search product test", () => {
-    const siteURL = "https://www2.hm.com/en_gb/index.html";
+describe("Add to favourites", () => {
+    const siteURL = "https://www2.hm.com/en_gb/productpage.1089412001.html";
+    const favouritesURL = "https://www2.hm.com/en_gb/favourites";
     const bstackURL = "http://vladsolovey_nLDfEK:mF4DwzGRk2vE1B86U8rs@hub-cloud.browserstack.com/wd/hub";
 
     beforeEach(async function () {
@@ -18,16 +20,18 @@ describe("Search product test", () => {
         await this.driver.manage().window().maximize();
     });
 
-    it("Should contain products", async function() {
-        const searchedProduct = "Regular Fit Ripstop cargo trousers";
+    it("Should add to favourites", async function() {
+        const itemName = "Regular Fit Ripstop cargo trousers";
 
-        const homePage = new HomePage(this.driver);
-        await homePage.openPage(siteURL);
-        await homePage.acceptCookies();
+        const itemPage = new ItemPage(this.driver);
+        await itemPage.openPage(siteURL);
+        await itemPage.acceptCookies();
 
-        await homePage.clickSearchInputField();
-        const searchResultsPage = await homePage.searchProduct(searchedProduct);
-        await searchResultsPage.checkSearchResults();
+        await itemPage.clickLikeButton();
+
+        const favouritesPage = new FavouritesPage(this.driver);
+        await favouritesPage.openPage(favouritesURL);
+        await favouritesPage.checkItemExist(itemName);
     }).timeout(60000);
 
     afterEach(async function () {
