@@ -1,37 +1,50 @@
-const webdriver = require("selenium-webdriver");
-const capabilities = require("../resources/capabilities.json");
+const chai = require("chai");
+chai.should();
+chai.use(require("chai-things"));
+const { expect } = require("chai");
+
+const DataReader = require("../services/DataReader");
+const Driver = require("../driver/Driver");
+const logger = require("../logger");
 
 const HomePage = require("../pages/HomePage");
+const SearchResultsPage = require("../pages/SearchResultsPage");
+const SearchResult = require("../models/SearchResult");
+const { TEST_TIMEOUT } = require("../config/constants");
 
 describe("Search product test", () => {
-    const siteURL = "https://www2.hm.com/en_gb/index.html";
-    const bstackURL = "http://vladsolovey_nLDfEK:mF4DwzGRk2vE1B86U8rs@hub-cloud.browserstack.com/wd/hub";
-
-    beforeEach(async function () {
-        this.driver = new webdriver.Builder()
-            .usingServer(bstackURL)
-            .withCapabilities({
-                ...capabilities,
-                ...capabilities['browser'] && { browserName: capabilities['browser']}  // Because NodeJS language binding requires browserName to be defined
-            })
-            .build();
-        await this.driver.manage().window().maximize();
+    before(async function () {
+        const props = await DataReader.getTestData("search.properties");
+        for (const key in props) {
+            this[key] = props[key];
+        }
     });
 
-    it("Should contain products", async function() {
-        const searchedProduct = "Regular Fit Ripstop cargo trousers";
+    beforeEach(async function() {
+        this.driver = await Driver.getInstance();
+    })
 
+    afterEach(async function() {
+        await Driver.killDriver();
+    })
+
+    it("Should handle search", async function() {
+        const commonSearchValue = this.commonSearchValue;
         const homePage = new HomePage(this.driver);
-        await homePage.openPage(siteURL);
+        await homePage.loadProperties();
+        await homePage.openPage();
         await homePage.acceptCookies();
-
         await homePage.clickSearchInputField();
-        const searchResultsPage = await homePage.searchProduct(searchedProduct);
-        await searchResultsPage.checkSearchResults();
-    }).timeout(60000);
+        await homePage.searchProduct(this.commonSearchValue);
 
-    afterEach(async function () {
-        await this.driver.quit();
-    });
+        const searchResultsPage = new SearchResultsPage(
+            this.driver,
+            new SearchResult(this.commonSearchValue, this.commonSearchResultsUrl)
+        );
+        await searchResultsPage.openPage();
+        const searchItemsHeadings = await searchResultsPage.getSearchItemsHeadings();
 
+        expect(searchItemsHeadings).to.not.be.empty;
+        searchItemsHeadings.should.all.satisfy(heading => heading === commonSearchValue);
+    }).timeout(TEST_TIMEOUT);
 });
