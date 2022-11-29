@@ -3,9 +3,7 @@ const Browser = webdriver.Browser;
 const Builder = webdriver.Builder;
 
 const argv = require("../services/ARGVReader").argv;
-let capabilities = require("../resources/capabilities.json");
-
-const bstackURL = "http://vladsolovey_nLDfEK:mF4DwzGRk2vE1B86U8rs@hub-cloud.browserstack.com/wd/hub";
+const capabilities = require("../resources/capabilities.json");
 
 class DriverSingleton {
     static driver;
@@ -45,12 +43,10 @@ class DriverSingleton {
 
     static async createBrowserDriverRemote(browser) {
         this.setCapabilities(browser);
-        const driver = await new Builder()
-            .usingServer(bstackURL)
+        return new Builder()
+            .usingServer(this.capabilities["bstackURL"])
             .withCapabilities(this.capabilities)
             .build();
-
-        return driver;
     }
 
     static async createDriverLocal() {
@@ -59,7 +55,7 @@ class DriverSingleton {
                 this.driver = await new Builder().forBrowser(Browser.FIREFOX).build();
                 break;
             default:
-                this.driver = await new Builder().forBrowser(Browser.CHROME).build();;
+                this.driver = await new Builder().forBrowser(Browser.CHROME).build();
                 break;
         }
 
@@ -80,5 +76,10 @@ class DriverSingleton {
         await this.driver.quit();
     }
 }
+
+// (async function() {
+//     let driver = await DriverSingleton.getInstance();
+//     await DriverSingleton.killDriver();
+// })();
 
 module.exports = DriverSingleton;

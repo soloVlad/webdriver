@@ -1,4 +1,5 @@
 {
+  "bstackURL": "http://vladsolovey_nLDfEK:mF4DwzGRk2vE1B86U8rs@hub-cloud.browserstack.com/wd/hub",
   "bstack:options": {
     "os": "Windows",
     "osVersion": "11",
