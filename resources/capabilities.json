@@ -2,9 +2,8 @@
   "bstack:options": {
     "os": "Windows",
     "osVersion": "11",
-    "buildName": "lab_10",
+    "buildName": "lab_11",
     "sessionName": "Parallel test 1"
   },
-  "browserName": "Chrome",
   "browserVersion": "latest"
 }
