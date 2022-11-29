@@ -21,6 +21,7 @@
     "chai": "^4.3.7",
     "minimist": "^1.2.7",
     "mocha": "^10.1.0",
+    "mocha-logger": "^1.0.8",
     "selenium-webdriver": "^4.6.1"
   },
   "devDependencies": {
