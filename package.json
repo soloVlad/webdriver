@@ -5,7 +5,7 @@
   "main": "tests/search.spec.js",
   "scripts": {
     "start": "node ./driver/Driver.js --BROWSER_NAME='firefox' --RUNNER='local'",
-    "test": "mocha tests/*.js --timeout 60000"
+    "test": "mocha tests/search.spec.js --BROWSER_NAME='firefox' --RUNNER='local' --timeout 120000"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
   "homepage": "https://github.com/soloVlad/webdriver#readme",
   "dependencies": {
     "chai": "^4.3.7",
+    "chai-things": "^0.2.0",
     "minimist": "^1.2.7",
     "mocha": "^10.1.0",
     "mocha-logger": "^1.0.8",
