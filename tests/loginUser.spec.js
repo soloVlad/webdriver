@@ -9,7 +9,6 @@ const Driver = require("../driver/Driver");
 const LoginPage = require("../pages/LoginPage");
 const User = require("../models/User");
 const { TEST_TIMEOUT } = require("../config/constants");
-const {log} = require("mocha-logger");
 
 describe("Login user", () => {
     before(async function () {
