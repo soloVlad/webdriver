@@ -4,7 +4,7 @@ const Builder = webdriver.Builder;
 
 const logger = require("../logger");
 const argv = require("../services/ARGVReader").argv;
-const capabilities = require("../resources/capabilities.json");
+const capabilities = require("../config/capabilities.json");
 
 class DriverSingleton {
     static driver;
@@ -79,10 +79,5 @@ class DriverSingleton {
         await this.driver.quit();
     }
 }
-
-// (async function() {
-//     let driver = await DriverSingleton.getInstance();
-//     await DriverSingleton.killDriver();
-// })();
 
 module.exports = DriverSingleton;
