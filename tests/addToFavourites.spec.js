@@ -1,5 +1,5 @@
 const webdriver = require("selenium-webdriver");
-const capabilities = require("../capabilities.json");
+const capabilities = require("../resources/capabilities.json");
 
 const ItemPage = require("../pages/ItemPage");
 const FavouritesPage = require("../pages/FavouritesPage");

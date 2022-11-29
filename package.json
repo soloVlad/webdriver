@@ -4,6 +4,7 @@
   "description": "",
   "main": "tests/search.spec.js",
   "scripts": {
+    "start": "node ./driver/Driver.js --BROWSER_NAME='firefox' --RUNNER='local'",
     "test": "mocha tests/*.js --timeout 60000"
   },
   "repository": {
@@ -18,7 +19,12 @@
   "homepage": "https://github.com/soloVlad/webdriver#readme",
   "dependencies": {
     "chai": "^4.3.7",
+    "minimist": "^1.2.7",
     "mocha": "^10.1.0",
     "selenium-webdriver": "^4.6.1"
+  },
+  "devDependencies": {
+    "chromedriver": "^107.0.3",
+    "geckodriver": "^3.2.0"
   }
 }
