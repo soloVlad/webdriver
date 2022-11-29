@@ -30,6 +30,19 @@ class Page {
         return this.driver.wait(until.elementsLocated(By.xpath(xpath)), LOADING_TIME);
     }
 
+    async getAllElementsText(loggerMsg, xpath) {
+        logger.info(loggerMsg);
+        const results = await this.findAllByXpath(xpath);
+        const unpackedResults = [];
+
+        for (const result of results) {
+            let text = await result.getText();
+            unpackedResults.push(text);
+        }
+
+        return unpackedResults;
+    }
+
     async clickByXpath(xpath) {
         const element = await this.findByXpath(xpath);
         await element.click();
