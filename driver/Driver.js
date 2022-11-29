@@ -19,7 +19,7 @@ class DriverSingleton {
     }
 
     static async createDriver() {
-        logger.info("Creating driver...");
+        logger.info("Creating driver");
         switch (argv.RUNNER) {
             case "local":
                 await this.createDriverLocal();
@@ -70,7 +70,7 @@ class DriverSingleton {
     }
 
     static async killDriver() {
-        logger.info("Killing driver...");
+        logger.info("Killing driver");
         await new Promise((resolve) => {
             setTimeout(async () => {
                 resolve();
