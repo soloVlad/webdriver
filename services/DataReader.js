@@ -1,5 +1,4 @@
 const fs = require('fs/promises');
-const logger = require('../logger');
 
 class DataReaderService {
     static async getTestData(fileName) {

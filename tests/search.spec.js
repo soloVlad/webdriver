@@ -5,7 +5,6 @@ const { expect } = require("chai");
 
 const DataReader = require("../services/DataReader");
 const Driver = require("../driver/Driver");
-const logger = require("../logger");
 
 const HomePage = require("../pages/HomePage");
 const SearchResultsPage = require("../pages/SearchResultsPage");
