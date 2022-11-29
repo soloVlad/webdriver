@@ -1,8 +1,8 @@
 const Page = require("./Page");
-const logger = require("../logger");
 
 class FavouritePage extends Page {
     static resourcesFileName = "favouritesPage.properties";
+    static favouritesItemHeadingXpath = "//h2[contains(@class, 'ProductTitle')]";
 
     constructor(driver) {
         super(driver);
@@ -14,12 +14,12 @@ class FavouritePage extends Page {
         return super.loadProperties(FavouritePage.resourcesFileName);
     }
 
-    // TODO: rework this method to only GET elements
-    async checkItemExist(itemName) {
-        const itemNameXpath = `//h2[contains(@class, 'ProductTitle')]//*[text()='${itemName}']`;
-        await this.findByXpath(itemNameXpath);
+    async openPage() {
+        return super.openPage(this.favouritesPageUrl);
+    }
 
-        return this;
+    async getFavouritesItemsHeadings() {
+        return this.getAllElementsText("Getting favourites items", FavouritePage.favouritesItemHeadingXpath);
     }
 }
 
