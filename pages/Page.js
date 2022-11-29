@@ -33,7 +33,7 @@ class Page {
     async getAllElementsText(loggerMsg, xpath) {
         logger.info(loggerMsg);
         const results = await this.findAllByXpath(xpath);
-        const unpackedResults = [];
+        let unpackedResults = [];
 
         for (const result of results) {
             let text = await result.getText();

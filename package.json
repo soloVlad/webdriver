@@ -5,7 +5,7 @@
   "main": "tests/search.spec.js",
   "scripts": {
     "start": "node ./driver/Driver.js --BROWSER_NAME='firefox' --RUNNER='local'",
-    "test": "mocha tests/search.spec.js --BROWSER_NAME='firefox' --RUNNER='local' --timeout 120000"
+    "test": "mocha tests/*.js --BROWSER_NAME='firefox' --RUNNER='local' --timeout 120000"
   },
   "repository": {
     "type": "git",

@@ -11,10 +11,7 @@ class DriverSingleton {
     static capabilities;
 
     static async getInstance() {
-        if (!this.driver) {
-            await this.createDriver();
-        }
-
+        await this.createDriver();
         return this.driver;
     }
 

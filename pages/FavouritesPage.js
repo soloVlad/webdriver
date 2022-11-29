@@ -1,8 +1,10 @@
 const Page = require("./Page");
+const logger = require("../logger");
 
 class FavouritePage extends Page {
     static resourcesFileName = "favouritesPage.properties";
-    static favouritesItemHeadingXpath = "//h2[contains(@class, 'ProductTitle')]";
+    //static favouritesItemHeadingXpath = "//h2[contains(@class, 'productTitle')]";
+    static favouritesItemHeadingXpath ="/html/body/div[2]/main/div[2]/ul[1]/li/article/div[2]/div/h2";
 
     constructor(driver) {
         super(driver);

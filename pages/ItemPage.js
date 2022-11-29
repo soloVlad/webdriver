@@ -4,16 +4,16 @@ const logger = require("../logger");
 class ItemPage extends Page {
     static addButtonXpath = "//button[contains(@class, 'button-buy')]";
     static likeButtonXpath = "//div[contains(@class, 'product-detail-info')]//button[contains(@class, 'FavouritesButton')]";
-    static resourcesFileName = "itemPage.properties";
+    static resourcesFileName = "item.properties";
 
-    constructor(driver) {
+    constructor(driver, item) {
         super(driver);
 
-        this.itemPageUrl = null;
+        this.item = item;
     }
 
-    async loadProperties() {
-        return super.loadProperties(ItemPage.resourcesFileName);
+    async openPage() {
+        return super.openPage(this.item.getPageUrl());
     }
 
     async clickAddButton() {

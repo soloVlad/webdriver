@@ -1,41 +1,45 @@
-const webdriver = require("selenium-webdriver");
-const capabilities = require("../resources/capabilities.json");
+const chai = require("chai");
+chai.should();
+chai.use(require("chai-things"));
+const { expect } = require("chai");
+
+const DataReader = require("../services/DataReader");
+const Driver = require("../driver/Driver");
 
 const ItemPage = require("../pages/ItemPage");
 const FavouritesPage = require("../pages/FavouritesPage");
+const Item = require("../models/Item");
+const { TEST_TIMEOUT } = require("../config/constants");
 
 describe("Add to favourites", () => {
-    const siteURL = "https://www2.hm.com/en_gb/productpage.1089412001.html";
-    const favouritesURL = "https://www2.hm.com/en_gb/favourites";
-    const bstackURL = "http://vladsolovey_nLDfEK:mF4DwzGRk2vE1B86U8rs@hub-cloud.browserstack.com/wd/hub";
-
-    beforeEach(async function () {
-        this.driver = new webdriver.Builder()
-            .usingServer(bstackURL)
-            .withCapabilities({
-                ...capabilities,
-                ...capabilities['browser'] && { browserName: capabilities['browser']}  // Because NodeJS language binding requires browserName to be defined
-            })
-            .build();
-        await this.driver.manage().window().maximize();
+    before(async function () {
+        const props = await DataReader.getTestData("item.properties");
+        for (const key in props) {
+            this[key] = props[key];
+        }
     });
 
+    beforeEach(async function() {
+        this.driver = await Driver.getInstance();
+    })
+
+    afterEach(async function() {
+        await Driver.killDriver();
+    })
+
     it("Should add to favourites", async function() {
-        const itemName = "Regular Fit Ripstop cargo trousers";
-
-        const itemPage = new ItemPage(this.driver);
-        await itemPage.openPage(siteURL);
+        const itemPage = new ItemPage(
+            this.driver,
+            new Item(this.itemName, this.itemId));
+        await itemPage.openPage();
         await itemPage.acceptCookies();
-
         await itemPage.clickLikeButton();
 
         const favouritesPage = new FavouritesPage(this.driver);
-        await favouritesPage.openPage(favouritesURL);
-        await favouritesPage.checkItemExist(itemName);
-    }).timeout(60000);
+        await favouritesPage.loadProperties();
+        await favouritesPage.openPage();
+        const favouriteItemsHeadings = await favouritesPage.getFavouritesItemsHeadings();
 
-    afterEach(async function () {
-        await this.driver.quit();
-    });
-
+        expect(favouriteItemsHeadings).to.have.members([this.itemName]);
+    }).timeout(TEST_TIMEOUT);
 });
