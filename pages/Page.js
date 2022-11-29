@@ -1,23 +1,33 @@
 const { By, until } = require("selenium-webdriver");
-const cookiesPopupPath = "//*[@id='onetrust-accept-btn-handler']";
+const logger = require("../logger");
+const DataReader = require("../services/DataReader");
+
+const { LOADING_TIME } = require("../config/constants");
 
 class Page {
+    static cookiesPopupPath = "//*[@id='onetrust-accept-btn-handler']";
+
     constructor(driver) {
         this.driver = driver;
     }
 
     async openPage(url) {
+        logger.info(`Opening ${url} page.`);
         await this.driver.get(url);
 
         return this;
     }
 
+    async getPageUrl() {
+        return this.driver.getCurrentUrl();
+    }
+
     async findByXpath(xpath) {
-        return this.driver.wait(until.elementLocated(By.xpath(xpath)), 5000);
+        return this.driver.wait(until.elementLocated(By.xpath(xpath)), LOADING_TIME);
     }
 
     async findAllByXpath(xpath) {
-        return this.driver.wait(until.elementsLocated(By.xpath(xpath)), 5000);
+        return this.driver.wait(until.elementsLocated(By.xpath(xpath)), LOADING_TIME);
     }
 
     async clickByXpath(xpath) {
@@ -28,7 +38,18 @@ class Page {
     }
 
     async acceptCookies() {
-        await this.clickByXpath(cookiesPopupPath);
+        logger.info("Accepting cookies.");
+        await this.clickByXpath(Page.cookiesPopupPath);
+
+        return this;
+    }
+
+    async loadProperties(fileName) {
+        const props = await DataReader.getTestData(fileName);
+
+        for (const key in props) {
+            this[key] = props[key];
+        }
 
         return this;
     }
