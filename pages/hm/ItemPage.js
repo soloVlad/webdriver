@@ -1,5 +1,5 @@
 const Page = require("./Page");
-const logger = require("../logger");
+const logger = require("../../logger");
 
 class ItemPage extends Page {
     static addButtonXpath = "//button[contains(@class, 'button-buy')]";

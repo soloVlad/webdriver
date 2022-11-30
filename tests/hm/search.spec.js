@@ -3,13 +3,13 @@ chai.should();
 chai.use(require("chai-things"));
 const { expect } = require("chai");
 
-const DataReader = require("../services/DataReader");
-const Driver = require("../driver/Driver");
+const DataReader = require("../../services/DataReader");
+const Driver = require("../../driver/Driver");
 
-const HomePage = require("../pages/HomePage");
-const SearchResultsPage = require("../pages/SearchResultsPage");
-const SearchResult = require("../models/SearchResult");
-const { TEST_TIMEOUT } = require("../config/constants");
+const HomePage = require("../../pages/hm/HomePage");
+const SearchResultsPage = require("../../pages/hm/SearchResultsPage");
+const SearchResult = require("../../models/SearchResult");
+const { TEST_TIMEOUT } = require("../../config/constants");
 
 describe("Search product test", () => {
     before(async function () {

@@ -1,5 +1,5 @@
 const { By, Key } = require("selenium-webdriver");
-const logger = require("../logger");
+const logger = require("../../logger");
 
 const Page = require("./Page");
 const SearchResultsPage = require("./SearchResultsPage");

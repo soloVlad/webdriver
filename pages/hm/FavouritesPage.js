@@ -1,5 +1,5 @@
 const Page = require("./Page");
-const logger = require("../logger");
+const logger = require("../../logger");
 
 class FavouritePage extends Page {
     static resourcesFileName = "favouritesPage.properties";

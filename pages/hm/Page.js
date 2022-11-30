@@ -1,8 +1,8 @@
 const { By, until } = require("selenium-webdriver");
-const logger = require("../logger");
-const DataReader = require("../services/DataReader");
+const logger = require("../../logger");
+const DataReader = require("../../services/DataReader");
 
-const { LOADING_TIME } = require("../config/constants");
+const { LOADING_TIME } = require("../../config/constants");
 
 class Page {
     static cookiesPopupPath = "//*[@id='onetrust-accept-btn-handler']";

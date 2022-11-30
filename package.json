@@ -2,10 +2,10 @@
   "name": "webdriver",
   "version": "1.0.0",
   "description": "",
-  "main": "tests/search.spec.js",
+  "main": "tests/hm/search.spec.js",
   "scripts": {
     "start": "node ./driver/Driver.js --BROWSER_NAME='firefox' --RUNNER='local'",
-    "test": "mocha tests/loginUser.spec.js --BROWSER_NAME='firefox' --RUNNER='local' --timeout 120000"
+    "test": "mocha tests/hm/loginUser.spec.js --BROWSER_NAME='firefox' --RUNNER='local' --timeout 120000"
   },
   "repository": {
     "type": "git",

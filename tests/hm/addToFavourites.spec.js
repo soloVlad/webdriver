@@ -3,13 +3,13 @@ chai.should();
 chai.use(require("chai-things"));
 const { expect } = require("chai");
 
-const DataReader = require("../services/DataReader");
-const Driver = require("../driver/Driver");
+const DataReader = require("../../services/DataReader");
+const Driver = require("../../driver/Driver");
 
-const ItemPage = require("../pages/ItemPage");
-const FavouritesPage = require("../pages/FavouritesPage");
-const Item = require("../models/Item");
-const { TEST_TIMEOUT } = require("../config/constants");
+const ItemPage = require("../../pages/hm/ItemPage");
+const FavouritesPage = require("../../pages/hm/FavouritesPage");
+const Item = require("../../models/Item");
+const { TEST_TIMEOUT } = require("../../config/constants");
 
 describe("Add to favourites", () => {
     before(async function () {

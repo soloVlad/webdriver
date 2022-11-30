@@ -1,7 +1,8 @@
 const { By, Key } = require("selenium-webdriver");
-const logger = require("../logger");
+const logger = require("../../logger");
 
 const Page = require("./Page");
+const AccountPage = require("./AccountPage");
 
 class LoginPage extends Page {
     static loginButtonXpath = "//div[contains(@class, 'SignIn')]//button";
@@ -34,7 +35,7 @@ class LoginPage extends Page {
         await this.clickByXpath(LoginPage.passwordFieldXpath);
         await this.driver.findElement(By.xpath(LoginPage.passwordFieldXpath)).sendKeys(this.user.getPassword(), Key.ENTER);
 
-        return this;
+        return new AccountPage(this.driver, this.user);
     }
 
 }
