@@ -51,5 +51,5 @@ describe("Login user", () => {
 
         const userEmailFromSite = await accountPage.getUserEmail();
         expect(userEmailFromSite).to.equal(user.getEmail());
-    }).timeout(TEST_TIMEOUT);
+    }).timeout(TEST_TIMEOUT * 2);
 });
