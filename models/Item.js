@@ -1,7 +1,8 @@
 class Item {
-    constructor(name, id) {
+    constructor(name, id, url=null) {
         this.name = name;
         this.id = id;
+        this.url = url;
     }
 
     getName() {
@@ -21,7 +22,7 @@ class Item {
     }
 
     getPageUrl() {
-        return `https://www2.hm.com/en_gb/productpage.${this.id}.html`;
+        return this.url || `https://www2.hm.com/en_gb/productpage.${this.id}.html`;
     }
 }
 
