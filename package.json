@@ -5,7 +5,8 @@
   "main": "tests/hm/search.spec.js",
   "scripts": {
     "start": "node ./driver/Driver.js --BROWSER_NAME='firefox' --RUNNER='local'",
-    "test": "mocha tests/hm/loginUser.spec.js --BROWSER_NAME='firefox' --RUNNER='local' --timeout 120000"
+    "test": "nyc mocha tests/**/*.js --BROWSER_NAME='firefox' --RUNNER='local' --timeout 120000",
+    "remote-test": "mocha tests/**/*.js --BROWSER_NAME='firefox' --RUNNER='remote' --timeout 120000"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
     "minimist": "^1.2.7",
     "mocha": "^10.1.0",
     "mocha-logger": "^1.0.8",
+    "nyc": "^15.1.0",
     "selenium-webdriver": "^4.6.1"
   },
   "devDependencies": {
