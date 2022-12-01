@@ -24,6 +24,10 @@ describe("Add to favourites", () => {
     })
 
     afterEach(async function() {
+        if (this.currentTest.state !== "passed") {
+            const image = await this.driver.takeScreenshot();
+            await require('fs').writeFile('./screenshots/addToFavouritesFail.png', image, 'base64', (err) => console.log(err));
+        }
         await Driver.killDriver();
     })
 

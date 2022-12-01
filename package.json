@@ -5,7 +5,7 @@
   "main": "tests/hm/search.spec.js",
   "scripts": {
     "start": "node ./driver/Driver.js --BROWSER_NAME='firefox' --RUNNER='local'",
-    "test": "nyc mocha tests/**/*.js --BROWSER_NAME='firefox' --RUNNER='local' --timeout 120000 --report coberture",
+    "test": "nyc mocha tests/**/loginUser.spec.js --BROWSER_NAME='firefox' --RUNNER='local' --timeout 120000 --report coberture",
     "remote-test": "mocha tests/**/*.js --BROWSER_NAME='firefox' --RUNNER='remote' --timeout 120000"
   },
   "repository": {

@@ -24,6 +24,10 @@ describe("Login user", () => {
     })
 
     afterEach(async function() {
+        if (this.currentTest.state !== "passed") {
+            const image = await this.driver.takeScreenshot();
+            await require('fs').writeFile('./screenshots/loginFail.png', image, 'base64', (err) => console.log(err));
+        }
         await Driver.killDriver();
     })
 
@@ -36,9 +40,9 @@ describe("Login user", () => {
         await loginPage.acceptCookies();
 
         const accountPage = await loginPage.login();
-        // const settingsPage = await accountPage.openSettingsPage();
-        // const userEmailFromSite = await settingsPage.getUserEmail();
+        const settingsPage = await accountPage.openSettingsPage();
+        const userEmailFromSite = await settingsPage.getUserEmail();
 
-        //expect(userEmailFromSite).to.equal(user.getEmail());
+        expect(userEmailFromSite).to.equal(user.getEmail());
     }).timeout(TEST_TIMEOUT);
 });
