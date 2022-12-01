@@ -58,7 +58,7 @@ class Page {
     }
 
     async loadProperties(fileName) {
-        const props = await DataReader.getTestData(fileName);
+        const props = await DataReader.getTestData(fileName, "dolce");
 
         for (const key in props) {
             this[key] = props[key];
