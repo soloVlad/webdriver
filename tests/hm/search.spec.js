@@ -26,7 +26,11 @@ describe("Search product test", () => {
     afterEach(async function() {
         if (this.currentTest.state !== "passed") {
             const image = await this.driver.takeScreenshot();
-            await require('fs').writeFile('./screenshots/searchFail.png', image, 'base64', (err) => console.log(err));
+            await require('fs').writeFile(
+                './screenshots/searchFail.png',
+                image,
+                'base64',
+                (err) => {});
         }
         await Driver.killDriver();
     })
